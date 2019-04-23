@@ -28,7 +28,7 @@ class IPS_Volumio extends IPSModule
         $this->RegisterVariableBoolean('Volumio_Mute', $this->Translate('Mute'), '~Switch');
         $this->RegisterVariableInteger('Volumio_Controls', $this->Translate('Controls'), 'Volumio.Controls');
         $this->UpdateRadioSender();
-        $this->RegisterVariableInteger('Volumio_RadioSender', $this->Translate('Radio Sender'), 'Volumio.RadioSender.'.$this->InstanceID);
+        $this->RegisterVariableInteger('Volumio_RadioSender', $this->Translate('Radio Sender'), 'Volumio.RadioSender.' . $this->InstanceID);
 
         $this->EnableAction('Volumio_Power');
         $this->EnableAction('Volumio_Volume');
@@ -74,7 +74,7 @@ class IPS_Volumio extends IPSModule
                 }
                 if (fnmatch('*/status/info', $Buffer->Topic)) {
                     $Payload = json_decode($Buffer->Payload);
-                    switch($Payload->status) {
+                    switch ($Payload->status) {
                         case 'stop':
                             SetValue($this->GetIDForIdent('Volumio_Controls'), 4);
                             break;
@@ -94,11 +94,12 @@ class IPS_Volumio extends IPSModule
                     SetValue($this->GetIDForIdent('Volumio_Title'), $Payload->title);
                     SetValue($this->GetIDForIdent('Volumio_Artist'), $Payload->artist);
                 }
-                }
             }
         }
+    }
 
-    public function RequestAction($Ident, $Value) {
+    public function RequestAction($Ident, $Value)
+    {
         switch ($Ident) {
             case 'Volumio_RadioSender':
                 $this->PlayRadio($Value);

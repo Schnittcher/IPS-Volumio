@@ -1,6 +1,7 @@
 <?php
-trait VoluminoHelper {
 
+trait VoluminoHelper
+{
     protected function RegisterControls()
     {
         if (IPS_VariableProfileExists('Volumio.Controls')) {
@@ -31,9 +32,10 @@ trait VoluminoHelper {
         $this->RegisterProfileIntegerEx('Volumio.VolumeUpDown', '', '', '', $Associations);
     }
 
-    public function UpdateRadioSender() {
-        if (IPS_VariableProfileExists('Volumio.RadioSender.'.$this->InstanceID)) {
-            IPS_DeleteVariableProfile('Volumio.RadioSender.'.$this->InstanceID);
+    public function UpdateRadioSender()
+    {
+        if (IPS_VariableProfileExists('Volumio.RadioSender.' . $this->InstanceID)) {
+            IPS_DeleteVariableProfile('Volumio.RadioSender.' . $this->InstanceID);
         }
         $RadioJSON = $this->ReadPropertyString('RadioSender');
         if ($RadioJSON != '') {
@@ -43,12 +45,13 @@ trait VoluminoHelper {
             foreach ($RadioSender as $Radio) {
                 $Associations[] = array($Value++, $Radio->Name, '', -1);
             }
-            $ProfilName = 'Volumio.RadioSender.'.$this->InstanceID;
+            $ProfilName = 'Volumio.RadioSender.' . $this->InstanceID;
             $this->RegisterProfileIntegerEx($ProfilName, 'Database', '', '', $Associations);
         }
     }
 
-    public function PlayRadio(int $value) {
+    public function PlayRadio(int $value)
+    {
         $Data['DataID'] = '{043EA491-0325-4ADD-8FC2-A30C8EEB4D3F}';
         $Data['PacketType'] = 3;
         $Data['QualityOfService'] = 0;
@@ -56,14 +59,14 @@ trait VoluminoHelper {
         $Data['Topic'] = $this->ReadPropertyString('MQTTTopic') . '/set/addPlay';
 
         $RadioJSON = $this->ReadPropertyString('RadioSender');
-        $RadioSender = json_decode($RadioJSON,true);
+        $RadioSender = json_decode($RadioJSON, true);
         $Radio = $RadioSender[$value - 1];
 
         $Radio['service'] = 'webradio';
         $Radio['title'] = $Radio['Name'];
         $Radio['uri'] = $Radio['StreamURL'];
 
-        $Data['Payload'] = json_encode($Radio, JSON_UNESCAPED_SLASHES);;
+        $Data['Payload'] = json_encode($Radio, JSON_UNESCAPED_SLASHES);
         $DataJSON = json_encode($Data, JSON_UNESCAPED_SLASHES);
         $this->SendDebug(__FUNCTION__ . 'Topic', $Data['Topic'], 0);
         $this->SendDebug(__FUNCTION__, $DataJSON, 0);
@@ -116,7 +119,7 @@ trait VoluminoHelper {
         $this->SendDataToParent($DataJSON);
     }
 
-        public function VolumeDown()
+    public function VolumeDown()
     {
         $Data['DataID'] = '{043EA491-0325-4ADD-8FC2-A30C8EEB4D3F}';
         $Data['PacketType'] = 3;
@@ -142,7 +145,6 @@ trait VoluminoHelper {
         $this->SendDebug(__FUNCTION__ . 'Topic', $Data['Topic'], 0);
         $this->SendDebug(__FUNCTION__, $DataJSON, 0);
         $this->SendDataToParent($DataJSON);
-
     }
 
     public function VolumePushMinus()
@@ -157,7 +159,6 @@ trait VoluminoHelper {
         $this->SendDebug(__FUNCTION__ . 'Topic', $Data['Topic'], 0);
         $this->SendDebug(__FUNCTION__, $DataJSON, 0);
         $this->SendDataToParent($DataJSON);
-
     }
 
     public function Power(bool $value)
@@ -173,7 +174,6 @@ trait VoluminoHelper {
         $this->SendDebug(__FUNCTION__, $DataJSON, 0);
         $this->SendDataToParent($DataJSON);
     }
-
 
     public function Stop()
     {
@@ -277,39 +277,42 @@ trait VoluminoHelper {
         $this->SendDataToParent($DataJSON);
     }
 
-    public function getStatus() {
+    public function getStatus()
+    {
         $Data['DataID'] = '{043EA491-0325-4ADD-8FC2-A30C8EEB4D3F}';
         $Data['PacketType'] = 3;
         $Data['QualityOfService'] = 0;
         $Data['Retain'] = false;
         $Data['Topic'] = $this->ReadPropertyString('MQTTTopic') . '/get/status';
-        $Data['Payload'] ='';
+        $Data['Payload'] = '';
         $DataJSON = json_encode($Data, JSON_UNESCAPED_SLASHES);
         $this->SendDebug(__FUNCTION__ . 'Topic', $Data['Topic'], 0);
         $this->SendDebug(__FUNCTION__, $DataJSON, 0);
         $this->SendDataToParent($DataJSON);
     }
 
-    public function getMultiroomdevices() {
+    public function getMultiroomdevices()
+    {
         $Data['DataID'] = '{043EA491-0325-4ADD-8FC2-A30C8EEB4D3F}';
         $Data['PacketType'] = 3;
         $Data['QualityOfService'] = 0;
         $Data['Retain'] = false;
         $Data['Topic'] = $this->ReadPropertyString('MQTTTopic') . '/get/multiroomdevices';
-        $Data['Payload'] ='';
+        $Data['Payload'] = '';
         $DataJSON = json_encode($Data, JSON_UNESCAPED_SLASHES);
         $this->SendDebug(__FUNCTION__ . 'Topic', $Data['Topic'], 0);
         $this->SendDebug(__FUNCTION__, $DataJSON, 0);
         $this->SendDataToParent($DataJSON);
     }
 
-    public function getSources() {
+    public function getSources()
+    {
         $Data['DataID'] = '{043EA491-0325-4ADD-8FC2-A30C8EEB4D3F}';
         $Data['PacketType'] = 3;
         $Data['QualityOfService'] = 0;
         $Data['Retain'] = false;
         $Data['Topic'] = $this->ReadPropertyString('MQTTTopic') . '/get/browsesources';
-        $Data['Payload'] ='';
+        $Data['Payload'] = '';
         $DataJSON = json_encode($Data, JSON_UNESCAPED_SLASHES);
         $this->SendDebug(__FUNCTION__ . 'Topic', $Data['Topic'], 0);
         $this->SendDebug(__FUNCTION__, $DataJSON, 0);
@@ -333,6 +336,7 @@ trait VariableProfile
         IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
         IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize);
     }
+
     protected function RegisterProfileIntegerEx($Name, $Icon, $Prefix, $Suffix, $Associations)
     {
         if (count($Associations) === 0) {
@@ -347,6 +351,7 @@ trait VariableProfile
             IPS_SetVariableProfileAssociation($Name, $Association[0], $Association[1], $Association[2], $Association[3]);
         }
     }
+
     protected function RegisterMediaObject($Ident, $Name, $Typ, $Parent, $Position, $Cached, $Filename)
     {
         if (!IPS_MediaExists(@$this->GetIDForIdent($Ident))) {
