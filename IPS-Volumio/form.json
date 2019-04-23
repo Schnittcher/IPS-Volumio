@@ -1,0 +1,43 @@
+{
+    "elements":
+    [
+      { "type": "ValidationTextBox", "name": "MQTTTopic", "caption": "MQTT Topic" },
+      {
+        "type": "ExpansionPanel",
+        "caption": "Radio Sender",
+        "items": [
+          {
+            "type": "List",
+            "name": "RadioSender",
+            "caption": "Radio Sender",
+            "rowCount": 5,
+            "add": true,
+            "delete": true,
+            "sort": {
+              "column": "Name",
+              "direction": "ascending"
+            },
+            "columns": [{
+              "caption": "Name",
+              "name": "Name",
+              "width": "150px",
+              "add": "",
+              "edit": {
+                "type": "ValidationTextBox"
+              }
+            },{
+              "caption": "Stream URL",
+              "name": "StreamURL",
+              "width": "auto",
+              "add": "",
+              "edit": {
+                "type": "ValidationTextBox"
+              }
+            }],
+            "values": []
+          }
+        ]
+      },
+      { "type": "Button", "caption": "Update Radio Sender", "onClick": "VOLUMIO_UpdateRadioSender($id);" }
+    ]
+}
