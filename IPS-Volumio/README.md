@@ -1,5 +1,5 @@
-# IPS-Shelly1
-   Dieses Modul ermöglicht es, ein Shelly1 in IP-Symcon zu integrieren.
+# IPS-Volumio
+   Dieses Modul verbindet Volumio mit IP-Symcon.
      
    ## Inhaltverzeichnis
    1. [Konfiguration](#1-konfiguration)
