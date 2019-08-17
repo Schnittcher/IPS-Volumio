@@ -36,9 +36,9 @@ trait VoluminoHelper
     {
         $RadioJSON = $this->ReadPropertyString('RadioSender');
         if ($RadioJSON != '') {
-        if (IPS_VariableProfileExists('Volumio.RadioSender.' . $this->InstanceID)) {
-            IPS_DeleteVariableProfile('Volumio.RadioSender.' . $this->InstanceID);
-        }
+            if (IPS_VariableProfileExists('Volumio.RadioSender.' . $this->InstanceID)) {
+                IPS_DeleteVariableProfile('Volumio.RadioSender.' . $this->InstanceID);
+            }
 
             $Associations = array();
             $Value = 1;
