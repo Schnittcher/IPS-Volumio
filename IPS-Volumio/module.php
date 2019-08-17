@@ -27,7 +27,10 @@ class IPS_Volumio extends IPSModule
         $this->RegisterVariableInteger('Volumio_VolumePush', $this->Translate('Volume (Push)'), 'Volumio.VolumePush');
         $this->RegisterVariableBoolean('Volumio_Mute', $this->Translate('Mute'), '~Switch');
         $this->RegisterVariableInteger('Volumio_Controls', $this->Translate('Controls'), 'Volumio.Controls');
-        $this->UpdateRadioSender();
+        //$this->UpdateRadioSender();
+        if (!IPS_VariableProfileExists('Volumio.RadioSender.' . $this->InstanceID)) {
+            IPS_CreateVariableProfile('Volumio.RadioSender.' . $this->InstanceID, 1);
+        }
         $this->RegisterVariableInteger('Volumio_RadioSender', $this->Translate('Radio Sender'), 'Volumio.RadioSender.' . $this->InstanceID);
 
         $this->EnableAction('Volumio_Power');
