@@ -1,18 +1,21 @@
 [![Version](https://img.shields.io/badge/Symcon-PHPModul-red.svg)](https://www.symcon.de/service/dokumentation/entwicklerbereich/sdk-tools/sdk-php/)
 ![Version](https://img.shields.io/badge/Symcon%20Version-5.1%20%3E-blue.svg)
 [![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-green.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-[![StyleCI](https://styleci.io/repos/182964923/shield?style=flat)](https://styleci.io/repos/182964923)
+[![Check Style](https://github.com/Schnittcher/IPS-Volumio/workflows/Check%20Style/badge.svg)](https://github.com/Schnittcher/IPS-Volumio/actions)
 
 # IPS-Volumio
 Dieses Modul verbindet Volumio (https://volumio.org/) mit IP-Symcon. Vorrausgesetzt Volumio wurde mit dem MQTT Plugin (https://github.com/richiewebgate/volumio-mqtt) installiert.  
 
 ## Inhaltverzeichnis
-1. [Voraussetzungen](#1-voraussetzungen)
-2. [Enthaltene Module](#2-enthaltene-module)
-3. [Installation](#3-installation)
-4. [Konfiguration in IP-Symcon](#4-konfiguration-in-ip-symcon)
-5. [Spenden](#5-spenden)
-6. [Lizenz](#6-lizenz)
+- [IPS-Volumio](#ips-volumio)
+  - [Inhaltverzeichnis](#inhaltverzeichnis)
+  - [1. Voraussetzungen](#1-voraussetzungen)
+  - [2. Enthaltene Module](#2-enthaltene-module)
+    - [IPS-Volumio](#ips-volumio-1)
+  - [3. Installation](#3-installation)
+  - [4. Konfiguration in IP-Symcon](#4-konfiguration-in-ip-symcon)
+  - [5. Spenden](#5-spenden)
+  - [6. Lizenz](#6-lizenz)
 
 ## 1. Voraussetzungen
 
