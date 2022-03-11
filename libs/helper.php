@@ -1,37 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 trait VoluminoHelper
 {
-    protected function RegisterControls()
-    {
-        if (IPS_VariableProfileExists('Volumio.Controls')) {
-            IPS_DeleteVariableProfile('Volumio.Controls');
-        }
-        $Associations = array();
-        $Associations[] = array(1, 'Prev', '', -1);
-        $Associations[] = array(2, 'Play', '', -1);
-        $Associations[] = array(3, 'Pause', '', -1);
-        $Associations[] = array(4, 'Stop', '', -1);
-        $Associations[] = array(5, 'Next', '', -1);
-        $this->RegisterProfileIntegerEx('Volumio.Controls', 'Move', '', '', $Associations);
-
-        if (IPS_VariableProfileExists('Volumio.VolumePush')) {
-            IPS_DeleteVariableProfile('Volumio.VolumePush');
-        }
-        $Associations = array();
-        $Associations[] = array(1, '+', '', -1);
-        $Associations[] = array(2, '-', '', -1);
-        $this->RegisterProfileIntegerEx('Volumio.VolumePush', '', '', '', $Associations);
-
-        if (IPS_VariableProfileExists('Volumio.VolumeUpDown')) {
-            IPS_DeleteVariableProfile('Volumio.VolumeUpDown');
-        }
-        $Associations = array();
-        $Associations[] = array(1, 'Up', '', -1);
-        $Associations[] = array(2, 'Down', '', -1);
-        $this->RegisterProfileIntegerEx('Volumio.VolumeUpDown', '', '', '', $Associations);
-    }
-
     public function UpdateRadioSender()
     {
         $RadioJSON = $this->ReadPropertyString('RadioSender');
@@ -40,11 +12,11 @@ trait VoluminoHelper
                 IPS_DeleteVariableProfile('Volumio.RadioSender.' . $this->InstanceID);
             }
 
-            $Associations = array();
+            $Associations = [];
             $Value = 1;
             $RadioSender = json_decode($RadioJSON);
             foreach ($RadioSender as $Radio) {
-                $Associations[] = array($Value++, $Radio->Name, '', -1);
+                $Associations[] = [$Value++, $Radio->Name, '', -1];
             }
             $ProfilName = 'Volumio.RadioSender.' . $this->InstanceID;
             $this->RegisterProfileIntegerEx($ProfilName, 'Database', '', '', $Associations);
@@ -318,5 +290,34 @@ trait VoluminoHelper
         $this->SendDebug(__FUNCTION__ . 'Topic', $Data['Topic'], 0);
         $this->SendDebug(__FUNCTION__, $DataJSON, 0);
         $this->SendDataToParent($DataJSON);
+    }
+    protected function RegisterControls()
+    {
+        if (IPS_VariableProfileExists('Volumio.Controls')) {
+            IPS_DeleteVariableProfile('Volumio.Controls');
+        }
+        $Associations = [];
+        $Associations[] = [1, 'Prev', '', -1];
+        $Associations[] = [2, 'Play', '', -1];
+        $Associations[] = [3, 'Pause', '', -1];
+        $Associations[] = [4, 'Stop', '', -1];
+        $Associations[] = [5, 'Next', '', -1];
+        $this->RegisterProfileIntegerEx('Volumio.Controls', 'Move', '', '', $Associations);
+
+        if (IPS_VariableProfileExists('Volumio.VolumePush')) {
+            IPS_DeleteVariableProfile('Volumio.VolumePush');
+        }
+        $Associations = [];
+        $Associations[] = [1, '+', '', -1];
+        $Associations[] = [2, '-', '', -1];
+        $this->RegisterProfileIntegerEx('Volumio.VolumePush', '', '', '', $Associations);
+
+        if (IPS_VariableProfileExists('Volumio.VolumeUpDown')) {
+            IPS_DeleteVariableProfile('Volumio.VolumeUpDown');
+        }
+        $Associations = [];
+        $Associations[] = [1, 'Up', '', -1];
+        $Associations[] = [2, 'Down', '', -1];
+        $this->RegisterProfileIntegerEx('Volumio.VolumeUpDown', '', '', '', $Associations);
     }
 }
