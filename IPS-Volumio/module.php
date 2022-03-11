@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 require_once __DIR__ . '/../libs/helper.php';
-
+require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.php';
 class IPS_Volumio extends IPSModule
 {
-    use VariableProfile,
+    use VariableProfileHelper;
+    use
         VoluminoHelper;
 
     public function Create()
