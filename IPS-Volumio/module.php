@@ -57,9 +57,13 @@ class IPS_Volumio extends IPSModule
     {
         $this->SendDebug('JSON', $JSONString, 0);
         if (!empty($this->ReadPropertyString('MQTTTopic'))) {
-            $data = json_decode($JSONString);
-            // Buffer decodieren und in eine Variable schreiben
-            $Buffer = $data;
+            $Buffer = json_decode($JSONString);
+
+            //Für MQTT Fix in IPS Version 6.3
+            if (IPS_GetKernelDate() > 1670886000) {
+                $Buffer->Payload = utf8_decode($Buffer->Payload);
+            }
+
             $this->SendDebug('MQTT Topic', $Buffer->Topic, 0);
 
             if (property_exists($Buffer, 'Topic')) {
